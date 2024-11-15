@@ -1,0 +1,1036 @@
+@charset "UTF-8";
+
+*
+{
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    outline: none;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+:root
+{
+    --white-50: rgba(255,255,255, .5);
+    --grey: slategrey;
+    --tips: #ff6f66;
+    --black-80: rgba(0,0,0, .8);
+    --white: white;
+    --black-10: rgba(0,0,0, .1);
+    --pointer: pointer;
+}
+body
+{
+    background-color: #efeeee;
+}
+input[type="text"]::-ms-clear,
+input[type="password"]::-ms-reveal
+{
+    display: none;
+}
+
+@font-face
+{
+    font-family: "icon";
+    src: url('../font/iconfont.ttf') format('truetype'),
+         url('../font/iconfont.woff') format('woff'),
+         url('../font/iconfont.woff2') format('woff2');
+}
+.show, .hide,
+.user,
+.edit, .del,
+.selectDel,
+.cut, .copy, .paste
+{
+    font-family: "icon" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.show::before
+{
+    content: '\e60a';
+}
+.hide::before
+{
+    content: '\e60b';
+}
+.user::before
+{
+    content: '\e609';
+    margin: 0 6px 0 0;
+}
+.edit::before
+{
+    content: '\e610';
+}
+.edit::after
+{
+    content: '编辑';
+}
+.del::before,
+.selectDel::before
+{
+    content: '\e611';
+}
+.del::after
+{
+    content: '删除';
+}
+.selectDel::after
+{
+    content: '删除选中项';
+}
+.cut::before
+{
+    content: '\e60d';
+}
+.cut::after
+{
+    content: '剪切';
+}
+.copy::before
+{
+    content: '\e60e';
+}
+.copy::after
+{
+    content: '复制';
+}
+.paste::before
+{
+    content: '\e60f';
+}
+.paste::after
+{
+    content: '粘贴';
+}
+
+.popup,
+.tipsPopup
+{
+    width: 380px;
+    padding: 20px;
+    background-color: var(--white-50);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    transition: opacity, transform .5s;
+    position: fixed;
+    left: calc(50% - 190px);
+    z-index: 14;
+}
+.popup
+{
+    opacity: 1;
+    transform: scale(1);
+}
+[action="login"]
+{
+    height: 237px;
+    top: calc(50% - 118.5px);
+}
+[action="add"]
+{
+    height: 398px;
+    top: calc(50% - 199px);
+}
+.popup[language="other"]
+{
+    height: 238px;
+    top: calc(50% - 119px);
+}
+[action="query"]
+{
+    height: 197px;
+    top: calc(50% - 98.5px);
+}
+
+.caption,
+.add_query
+{
+    margin: 0 0 26px 0;
+}
+[action="login"] .caption::before
+{
+    content: '用户登录';
+}
+[action="query"] .caption::before
+{
+    content: '查询词库';
+}
+.off
+{
+    width: 40px;
+    height: 40px;
+    cursor: var(--pointer);
+    top: 10px;
+    right: 10px;
+}
+.off, .off::before, .off::after,
+.text .empty, .textarea .empty, .empty::before, .empty::after,
+.showHide,
+.add::before, .add::after, .query::before, .query::after,
+.row .checkbox input,
+.row .checkbox > span, .row .checkbox > span::before,
+.row .checkbox > span span, .row .checkbox > span span::before, .row .checkbox > span span::after,
+.action .checkbox input,
+.action .checkbox > span:nth-child(2)::before,
+.action .checkbox > span:nth-child(2) span, .action .checkbox > span:nth-child(2) span::before, .action .checkbox > span:nth-child(2) span::after,
+.selectMaxRow, .selectMaxBtn, .arrow::before, .arrow::after,
+.prev::before, .prev::after, .next::before, .next::after
+{
+    position: absolute;
+}
+.off:hover,
+.exit:hover
+{
+    opacity: .5;
+}
+.off::before, .off::after,
+.empty::before, .empty::after,
+.add::before, .add::after, .query::before, .query::after,
+.row .checkbox > span::before,
+.row .checkbox > span span::before, .row .checkbox > span span::after,
+.action .checkbox > span:nth-child(2)::before,
+.action .checkbox > span:nth-child(2) span::before, .action .checkbox > span:nth-child(2) span::after,
+.arrow::before, .arrow::after,
+.prev::before, .prev::after, .next::before, .next::after
+{
+    content: '';
+}
+.off::before, .off::after
+{
+    width: 20px;
+    height: 3px;
+    background-color: var(--grey);
+    border-radius: 1.5px;
+    top: calc(50% - 1.5px);
+    left: calc(50% - 10px);
+}
+.off::before,
+.empty::before,
+.arrow::before,
+.prev::after, .next::before
+{
+    transform: rotate(45deg);
+}
+.off::after,
+.empty::after,
+.query::after,
+.arrow::after,
+.prev::before, .next::after
+{
+    transform: rotate(-45deg);
+}
+.text, .password
+{
+    width: 100%;
+    height: 60px;
+}
+.textarea
+{
+    width: 100%;
+    height: 80px;
+}
+.text, .password, .showHide .empty,
+.textarea,
+.add, .query,
+.row .checkbox,
+.action .checkbox, .action .checkbox > span:nth-child(2),
+.selectBox, .arrow,
+.prev, .next
+{
+    position: relative;
+}
+[action="login"] .textarea,
+[action="login"] .btns,
+[action="login"] .span,
+[action="add"] .text,
+[action="add"] .password,
+[action="add"] .textarea:nth-child(8),
+[action="add"] .btns,
+.popup[language="other"] .textarea:nth-child(5),
+.popup[language="other"] .textarea:nth-child(6),
+[action="query"] .text,
+[action="query"] .password,
+[action="query"] .textarea:nth-child(5),
+[action="query"] .textarea:nth-child(6),
+[action="query"] .textarea:nth-child(7),
+[action="query"] button,
+[action="query"] .span,
+.empty,
+.table, .pagination, .selectMaxRow, .selectMaxBtn
+{
+    display: none;
+}
+.text input, .password input,
+.textarea textarea
+{
+    width: inherit;
+    background-color: var(--white-50);
+    border-radius: 6px;
+    border: none;
+}
+.text input, .password input
+{
+    height: 30px;
+    padding: 0 70px 0 10px;
+}
+.textarea textarea
+{
+    height: 50px;
+    padding: 10px 40px 10px 10px;
+    resize: none;
+    overflow: hidden;
+}
+.empty
+{
+    width: 30px;
+    height: 30px;
+    cursor: var(--pointer);
+}
+.text .empty,
+.showHide,
+.textarea .empty
+{
+    bottom: 30px;
+    right: 0;
+}
+.text input:valid + .empty,
+.password input:valid + .showHide .empty,
+.textarea textarea:valid + .empty
+{
+    display: block;
+}
+.empty::before, .empty::after
+{
+    width: 14px;
+    height: 3px;
+    background-color: var(--grey);
+    border-radius: 1.5px;
+    top: calc(50% - 1.5px);
+    left: calc(50% - 7px);
+}
+.showHide
+{
+    width: 30px;
+    height: 30px;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+}
+.password input:valid + .showHide
+{
+    width: 60px;
+}
+.show
+{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 18px;
+    color: var(--grey);
+    cursor: var(--pointer);
+}
+.tips
+{
+    margin: 2px 0 0 10px;
+    font-size: 14px;
+    color: var(--tips);
+}
+.popup button
+{
+    width: 100%;
+    height: 30px;
+    background-color: var(--white-50);
+    border-radius: 6px;
+    border: none;
+    cursor: var(--pointer);
+}
+[action="login"] button::before
+{
+    content: '登录';
+}
+.btns,
+.add_query,
+.header,
+.row,
+.action
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btns span
+{
+    display: block;
+    width: 94px;
+    height: 30px;
+    background-color: var(--white-50);
+    border-radius: 6px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 13.3333px;
+    cursor: var(--pointer);
+}
+.span
+{
+    width: 100%;
+    margin: 20px auto 0;
+    text-align: center;
+}
+.span span:nth-child(1),
+.span span:nth-child(3)
+{
+    cursor: var(--pointer);
+}
+.span span:nth-child(2)
+{
+    color: var(--grey);
+}
+
+.table
+{
+    width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: var(--white-50);
+    border-radius: 6px;
+}
+.add_query span:nth-child(2),
+.action .checkbox,
+.pagination > span:nth-child(2), .pageBtn
+{
+    display: flex;
+}
+.add, .query
+{
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin: 0 10px 0 0;
+    background-color: var(--black-80);
+    border-radius: 3px;
+    cursor: var(--pointer);
+}
+.add::before, .add::after
+{
+    width: 12px;
+    height: 2px;
+    background-color: var(--white);
+    border-radius: 1px;
+    top: calc(50% - 1px);
+    left: calc(50% - 6px);
+}
+.add::before
+{
+    transform: rotate(90deg);
+}
+.query::before
+{
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+}
+.query::after
+{
+    width: 2px;
+    height: 4px;
+    background-color: var(--white);
+    top: 15px;
+    left: 15px;
+}
+.user
+{
+    max-width: 118px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.exit,
+.row
+{
+    cursor: var(--pointer);
+}
+.header > span:nth-child(1),
+.row > span:nth-child(1)
+{
+    width: 50px;
+}
+.header > span:nth-child(2),
+.row > span:nth-child(2)
+{
+    width: 80px;
+}
+.header > span:nth-child(3),
+.row > span:nth-child(3)
+{
+    width: 120px;
+}
+.header > span:nth-child(4),
+.row > span:nth-child(4)
+{
+    width: 200px;
+}
+.header > span:nth-child(5),
+.row > span:nth-child(5)
+{
+    width: 260px;
+}
+.header > span:nth-child(6),
+.row > span:nth-child(6)
+{
+    width: 150px;
+    border-right: 1px solid var(--black-10);
+}
+.header > span,
+.row > span
+{
+    height: 40px;
+    border-bottom: 1px solid var(--black-10);
+    border-left: 1px solid var(--black-10);
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+}
+.header > span
+{
+    border-top: 1px solid var(--black-10);
+}
+.row > span:nth-child(2),
+.row > span:nth-child(3),
+.row > span:nth-child(4),
+.row > span:nth-child(5)
+{
+    padding: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.row .checkbox, .row .checkbox input, .row .checkbox > span
+{
+    display: block;
+    width: 26px;
+    height: 26px;
+    cursor: var(--pointer);
+}
+.row .checkbox
+{
+    margin: 7px auto;
+}
+.row .checkbox input, .row .checkbox > span, .row .checkbox > span span::before,
+.action .checkbox input, .action .checkbox > span:nth-child(2) span::before
+{
+    top: 0;
+    left: 0;
+}
+.row .checkbox input,
+.action .checkbox input
+{
+    opacity: 0;
+    z-index: 1;
+}
+.row .checkbox > span,
+.action .checkbox > span:nth-child(2)
+{
+    background-color: var(--black-10);
+    border-radius: 6px;
+    transition: .2s ease;
+    transition-delay: .2s;
+}
+.row .checkbox input:checked + span,
+.action .checkbox input:checked + span
+{
+    background-color: var(--black-80);
+    transition-delay: 0s;
+}
+.row .checkbox > span::before,
+.action .checkbox > span:nth-child(2)::before
+{
+    width: 22px;
+    height: 22px;
+    background-color: var(--white);
+    border-radius: 4px;
+    transition: .2s ease;
+    transition-delay: .2s;
+    top: 2px;
+    left: 2px;
+}
+.row .checkbox input:checked + span::before,
+.action .checkbox input:checked + span::before
+{
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transition-delay: 0s;
+    top: 13px;
+    left: 13px;
+}
+.row .checkbox > span span,
+.action .checkbox > span:nth-child(2) span
+{
+    display: block;
+    width: 14px;
+    height: 8px;
+    transform: rotateZ(-45deg);
+    top: 7px;
+    left: calc(50% - 7px);
+}
+.row .checkbox > span span::before, .row .checkbox > span span::after,
+.action .checkbox > span:nth-child(2) span::before, .action .checkbox > span:nth-child(2) span::after
+{
+    background-color: var(--white);
+    transition: .2s ease;
+}
+.row .checkbox > span span::before,
+.action .checkbox > span:nth-child(2) span::before
+{
+    width: 2px;
+    height: 0;
+    transition-delay: .2s;
+}
+.row .checkbox input:checked + span span::before,
+.action .checkbox input:checked + span:nth-child(2) span::before
+{
+    height: 100%;
+    transition-delay: .2s;
+}
+.row .checkbox > span span::after,
+.action .checkbox > span:nth-child(2) span::after
+{
+    width: 0;
+    height: 2px;
+    transition-delay: 0s;
+    bottom: 0;
+    left: 0;
+}
+.row .checkbox input:checked + span span::after,
+.action .checkbox input:checked + span:nth-child(2) span::after
+{
+    width: 100%;
+    transition-delay: .4s;
+}
+.edit_del,
+.action > span:nth-child(2)
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.edit, .del
+{
+    width: 60px;
+    height: 26px;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13.3333px;
+    color: var(--white);
+    cursor: var(--pointer);
+}
+.edit
+{
+    margin: 0 8px 0 0;
+    background-color: var(--black-80);
+}
+.del
+{
+    background-color: var(--tips);
+}
+.edit::after, .del::after,
+.action .checkbox > span:last-child,
+.selectDel::after
+{
+    margin: 0 0 0 6px;
+}
+.action
+{
+    border-bottom: 1px solid var(--black-10);
+    border-left: 1px solid var(--black-10);
+    border-right: 1px solid var(--black-10);
+}
+.action > span:nth-child(2)
+{
+    width: 149px;
+}
+.action > span
+{
+    height: 40px;
+    font-size: 14px;
+}
+.action .checkbox
+{
+    margin: 7px 12px;
+}
+.action .checkbox, .action .checkbox input
+{
+    width: 74px;
+}
+.action .checkbox, .action .checkbox input, .action .checkbox > span
+{
+    height: 26px;
+    cursor: var(--pointer);
+}
+.action .checkbox > span:nth-child(2)
+{
+    width: 26px;
+}
+.action .checkbox > span:last-child
+{
+    width: 42px;
+    line-height: 26px;
+}
+.selectDel
+{
+    width: 128px;
+    height: 26px;
+    background-color: var(--tips);
+    border-radius: 6px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13.3333px;
+    color: var(--white);
+    cursor: var(--pointer);
+}
+.pagination
+{
+    width: 100%;
+    margin: 20px 0 0;
+    align-items: center;
+    flex-direction: column;
+}
+.pagination > span
+{
+    line-height: 26px;
+    font-size: 14px;
+}
+.pagination > span:nth-child(2)
+{
+    margin: 10px 0 0;
+}
+.pagination > span:nth-child(3)
+{
+    margin: 10px 0;
+}
+.pagination > span:first-child > .selectBox
+{
+    width: 95.63px;
+}
+.pagination > span:last-child > .selectBox
+{
+    width: 114.06px;
+}
+.selectBox
+{
+    height: 26px;
+    padding: 0 10px;
+    background-color: var(--black-80);
+    border-radius: 6px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13.3333px;
+    color: var(--white);
+    cursor: var(--pointer);
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.selectBox_radius
+{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.selectMaxRow, .selectMaxBtn
+{
+    width: inherit;
+    background-color: var(--black-80);
+    backdrop-filter: blur(10px);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    bottom: 26px;
+    left: 0;
+    z-index: 1;
+}
+.maxRow_maxBtn
+{
+    display: block;
+}
+.selectMaxRow span, .selectMaxBtn span
+{
+    display: block;
+    width: inherit;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13.3333px;
+    color: var(--white);
+    cursor: var(--pointer);
+}
+.selectMaxRow span:hover, .selectMaxBtn span:hover
+{
+    font-size: 14px;
+}
+.arrow
+{
+    width: 12px;
+    height: 8px;
+    margin: 0 0 0 6px;
+    transition: .2s;
+}
+.arrow_deg
+{
+    transform: rotate(180deg);
+}
+.arrow::before, .arrow::after
+{
+    width: 8px;
+    height: 2px;
+    background-color: var(--white);
+    border-radius: 1px;
+    top: calc(50% - 1px);
+}
+.arrow::before
+{
+    left: 0;
+}
+.arrow::after
+{
+    right: 0;
+}
+.prev, .next
+{
+    width: 26px;
+    height: 26px;
+    background-color: var(--black-80);
+    border-radius: 6px;
+    border: none;
+    cursor: var(--pointer);
+}
+.prev:disabled, .next:disabled
+{
+    background-color: var(--black-10);
+    cursor: not-allowed;
+}
+.prev::before, .prev::after, .next::before, .next::after
+{
+    width: 10px;
+    height: 2px;
+    background-color: var(--white);
+    border-radius: 1px;
+    left: 8px;
+}
+.prev::before, .next::before
+{
+    top: 35%;
+}
+.prev::after, .next::after
+{
+    bottom: 35%;
+}
+.pageBtn span
+{
+    min-width: 26px;
+    height: 26px;
+    margin: 0 0 0 6px;
+    padding: 0 6px;
+    background-color: var(--black-80);
+    border-radius: 6px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13.3333px;
+    color: var(--white);
+    cursor: var(--pointer);
+}
+.pageBtn span:last-child
+{
+    margin: 0 6px;
+}
+.pageBtn .active
+{
+    background-color: var(--tips);
+}
+.page
+{
+    width: 100px;
+    height: 26px;
+    padding: 0 6px;
+    border-radius: 6px;
+    border: 1px solid var(--black-10);
+    text-align: center;
+}
+.go
+{
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    background-color: var(--black-80);
+    border-radius: 6px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13.3333px;
+    color: var(--white);
+    cursor: var(--pointer);
+}
+
+.cut_copy_paste
+{
+    width: 128px;
+    height: 128px;
+    padding: 4px;
+    background-color: var(--white-50);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    transform-origin: 0 0;
+    transform: scale(0);
+    transition: transform .2s;
+    overflow: hidden;
+    position: fixed;
+    z-index: 16;
+}
+.cut_copy_paste span
+{
+    width: 100%;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: var(--pointer);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cut, .copy
+{
+    color: var(--grey);
+}
+.black
+{
+    color: black;
+}
+.cut_copy_paste span::before
+{
+    font-size: 18px;
+}
+.cut_copy_paste span::after
+{
+    margin: 0 0 0 20px;
+}
+.black:hover, .paste:hover
+{
+    background-color: rgba(0,0,0, .2);
+}
+
+.tipsPopup
+{
+    height: 144px;
+    opacity: 0;
+    transform: scale(0);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    top: calc(50% - 72px);
+}
+.good
+{
+    width: 100%;
+    height: 30px;
+    background-color: var(--white-50);
+    border-radius: 6px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 13.3333px;
+    cursor: var(--pointer);
+}
+
+@media screen and (orientation: portrait) and (max-width: 768px)
+{
+    .popup,
+    .tipsPopup
+    {
+        width: 340px;
+        left: calc(50% - 170px);
+    }
+
+    .table
+    {
+        width: 95%;
+    }
+    .header > span:nth-child(1),
+    .header > span:nth-child(2),
+    .header > span:nth-child(3),
+    .header > span:nth-child(4),
+    .row > span:nth-child(1),
+    .row > span:nth-child(2),
+    .row > span:nth-child(3),
+    .row > span:nth-child(4),
+    .action
+    {
+        display: none;
+    }
+    .header > span:nth-child(5),
+    .row > span:nth-child(5)
+    {
+        flex: 1;
+    }
+}
+@media screen and (orientation: landscape) and (max-width: 1024px)
+{
+    .popup,
+    .tipsPopup
+    {
+        width: 340px;
+        left: calc(50% - 170px);
+    }
+
+    .table
+    {
+        width: 95%;
+    }
+    .header > span:nth-child(3),
+    .header > span:nth-child(4),
+    .row > span:nth-child(3),
+    .row > span:nth-child(4)
+    {
+        display: none;
+    }
+    .header > span:nth-child(5),
+    .row > span:nth-child(5)
+    {
+        flex: 1;
+    }
+}
+@media screen and (orientation: portrait) and (min-width: 820px) and (max-width: 1368px)
+{
+    .table
+    {
+        width: 95%;
+    }
+    .header > span:nth-child(3),
+    .header > span:nth-child(4),
+    .header > span:nth-child(5),
+    .row > span:nth-child(3),
+    .row > span:nth-child(4),
+    .row > span:nth-child(5)
+    {
+        flex: 1;
+    }
+}
+@media screen and (orientation: portrait) and (width: 1024px) and (height: 1366px)
+{
+    .table
+    {
+        width: 900px;
+    }
+    .header > span:nth-child(3),
+    .header > span:nth-child(4),
+    .header > span:nth-child(5),
+    .row > span:nth-child(3),
+    .row > span:nth-child(4),
+    .row > span:nth-child(5)
+    {
+        flex: none;
+    }
+}

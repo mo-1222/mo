@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>请尊重我，别搞事情！</title>
+
+        <link rel="shortcut icon" href="image/favicon.ico">
+        <link rel="bookmark" href="image/favicon.ico">
+        <style>
+                    *
+                    {
+                        margin: 0;
+                        padding: 0;
+                        font-weight: 700;
+                        outline: none;
+                        box-sizing: border-box;
+                        user-select: none;
+                        -webkit-tap-highlight-color: transparent;
+                    }
+                    body
+                    {
+                        height: 100vh;
+                        background-color: #efeeee;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .all
+                    {
+                        width: 340px;
+                        height: 220px;
+                        background-color: rgba(255,255,255, .5);
+                        backdrop-filter: blur(10px);
+                        border-radius: 14px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                    }
+                    .number
+                    {
+                        height: 80px;
+                        line-height: 80px;
+                        font-size: 80px;
+                    }
+                    .tips
+                    {
+                        margin: 8px 0 0;
+                        font-size: 20px;
+                    }
+                    .number, .tips, .btn
+                    {
+                        color: #ff6f66;
+                    }
+                    .btn
+                    {
+                        width: 100px;
+                        height: 30px;
+                        margin: 30px 0 0;
+                        background-color: #efeeee;
+                        border-radius: 6px;
+                        border: none;
+                        cursor: pointer;
+                    }
+        </style>
+
+</head>
+<body>
+
+        <div class="all">
+                <div class="number">403</div>
+                <div class="tips">您在做什么，请别搞事啊！</div>
+                <button class="btn">HOME</button>
+        </div>
+
+        <script>
+                    let btn = document.querySelector('.btn');
+
+                    btn.onclick = function()
+                    {
+                        window.open('https://wumo.cc', '_self');
+                    }
+        </script>
+    
+</body>
+</html>

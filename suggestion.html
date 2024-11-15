@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>词库</title>
+
+        <link rel="shortcut icon" href="image/favicon.ico">
+        <link rel="bookmark" href="image/favicon.ico">
+        <link rel="stylesheet" href="css/suggestion.css">
+
+</head>
+<body>
+
+        <div class="all">
+                <div class="popup" action="login">
+                        <div class="caption"></div>
+                        <div class="off"></div>
+
+                        <div class="text">
+                                <input type="text" placeholder="邮箱" required title mo="mo" inputmode="text" class="email">
+                                <span class="empty"></span>
+                                <span class="tips"></span>
+                        </div>
+                        <div class="password">
+                                <input type="password" placeholder="密码" required title mo="mo" inputmode="text" class="code">
+                                <span class="showHide">
+                                        <span class="show"></span>
+                                        <span class="empty"></span>
+                                </span>
+                                <span class="tips"></span>
+                        </div>
+                        <div class="textarea">
+                                <textarea placeholder="关键字简拼" required title mo="mo" inputmode="text" class="wd"></textarea>
+                                <span class="empty"></span>
+                                <span class="tips"></span>
+                        </div>
+                        <div class="textarea">
+                                <textarea placeholder="关键字全拼" required title mo="mo" inputmode="text" class="keyword"></textarea>
+                                <span class="empty"></span>
+                                <span class="tips"></span>
+                        </div>
+                        <div class="textarea">
+                                <textarea placeholder="建议" required title mo="mo" inputmode="text" class="suggestion"></textarea>
+                                <span class="empty"></span>
+                                <span class="tips"></span>
+                        </div>
+                        <div class="textarea">
+                                <textarea placeholder="关键字" required title mo="mo" inputmode="text" class="search"></textarea>
+                                <span class="empty"></span>
+                                <span class="tips"></span>
+                        </div>
+                        <button></button>
+                        <div class="btns">
+                                <span class="single">单个</span>
+                                <span class="similar">相似</span>
+                                <span class="whole">全部</span>
+                        </div>
+
+                        <div class="span">
+                                <span class="chinese">中文语言</span>
+                                <span>|</span>
+                                <span class="other">其它语言</span>
+                        </div>
+                </div>
+
+                <div class="table">
+                        <div class="add_query">
+                                <span>词库</span>
+                                <span>
+                                        <span class="add"></span>
+                                        <span class="query"></span>
+                                        <span class="user"></span>
+                                        <span>，</span>
+                                        <span class="exit">退出</span>
+                                </span>
+                        </div>
+                        <div class="header">
+                                <span></span>
+                                <span>序号</span>
+                                <span>关键字简拼</span>
+                                <span>关键字全拼</span>
+                                <span>建议</span>
+                                <span>操作</span>
+                        </div>
+                        <div class="action">
+                                <span>
+                                        <span class="checkbox">
+                                                <input type="checkbox" class="selectAll">
+                                                <span>
+                                                        <span></span>
+                                                </span>
+                                                <span>全选</span>
+                                        </span>
+                                </span>
+                                <span>
+                                        <span class="selectDel"></span>
+                                </span>
+                        </div>
+                        <div class="pagination">
+                                <span>
+                                        <span class="readonlyData"></span>
+                                        <span class="selectBox">
+                                                <span class="selectMaxRow">
+                                                        <span>10条/页</span>
+                                                        <span>20条/页</span>
+                                                        <span>50条/页</span>
+                                                        <span>100条/页</span>
+                                                        <span>200条/页</span>
+                                                </span>
+                                                <span class="readonlyRow"></span>
+                                                <span class="arrow"></span>
+                                        </span>
+                                </span>
+                                <span>
+                                        <button class="prev"></button>
+                                        <span class="pageBtn"></span>
+                                        <button class="next"></button>
+                                </span>
+                                <span>
+                                        <span class="readonlyPage"></span>
+                                        <span>
+                                                第
+                                                <input type="text" class="page">
+                                                页
+                                                <span class="go">跳转</span>
+                                        </span>
+                                </span>
+                                <span>
+                                        <span class="selectBox">
+                                                <span class="selectMaxBtn">
+                                                        <span>2个/组按钮</span>
+                                                        <span>6个/组按钮</span>
+                                                        <span>12个/组按钮</span>
+                                                        <span>16个/组按钮</span>
+                                                        <span>22个/组按钮</span>
+                                                </span>
+                                                <span class="readonlyBtn"></span>
+                                                <span class="arrow"></span>
+                                        </span>
+                                </span>
+                        </div>
+                </div>
+
+                <div class="cut_copy_paste">
+                        <span class="cut"></span>
+                        <span class="copy"></span>
+                        <span class="paste"></span>
+                </div>
+
+                <div class="tipsPopup">
+                        <div class="tipsCaption">温馨提示</div>
+                        <div class="off"></div>
+
+                        <span></span>
+
+                        <div class="good">好的</div>
+                </div>
+        </div>
+
+        <script src="js/jQuery-2.1.3.min.js" type="text/javascript" charset="UTF-8"></script>
+        <script src="js/suggestion.js" type="text/javascript" charset="UTF-8"></script>
+        
+</body>
+</html>
